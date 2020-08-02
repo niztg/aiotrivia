@@ -23,6 +23,6 @@ class Question:
     def incorrect_answers(self):
         return self._incorrect_answers
 
-    def add_incorrect_answers(self, *data):
-        for item in data:
+    def add_incorrect_answers(self, *args):
+        for item in args:
             self._incorrect_answers.append(item)
