@@ -11,7 +11,7 @@ class TriviaClient:
 
     async def get_random_question(self, difficulty):
         async with aiohttp.ClientSession() as cs:
-            async with cs.get("https://opentdb.com/api.php?amount=1",
+            async with cs.get("https://opentdb.com/api.php",
                               params={"amount": 1, "difficulty": difficulty}) as r:
                 data = await r.json()
             await cs.close()
