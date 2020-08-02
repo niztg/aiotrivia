@@ -9,7 +9,6 @@ class Question:
     __slots__ = ('category', 'type', 'question', 'answer', '_incorrect_answers')
 
     def __init__(self, data):
-        data = data.get('results')[0]
         self.category = data.get('category')
         self.type = data.get('type')
         self.question = unescape(str(data.get('question')))
