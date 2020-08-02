@@ -20,7 +20,7 @@ class Question:
         return f"<aiotrivia.question.Question: question={self.question}, category={self.category}, type={self.type}>"
 
     @property
-    def incorrect_answers(self):
+    def incorrect_answers(self) -> list:
         return self._incorrect_answers
 
     def add_incorrect_answers(self, *args):

@@ -10,7 +10,7 @@ import aiohttp
 class TriviaClient:
 
     @staticmethod
-    async def get_random_question(difficulty):
+    async def get_random_question(difficulty) -> Question:
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://opentdb.com/api.php",
                               params={"amount": 1, "difficulty": difficulty}) as r:
