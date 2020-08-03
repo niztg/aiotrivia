@@ -8,6 +8,6 @@ import aiohttp
 
 
 class HTTPClient:
-    def __init__(self):
-        self.session = aiohttp.ClientSession()
-        self.url = 'https://opentdb.com/api.php'
+    def __init__(self, session=aiohttp.ClientSession(), url='https://opentdb.com/api.php'):
+        self.session = session
+        self.url = url

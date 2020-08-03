@@ -3,12 +3,13 @@
 Async Wrapper for the OpenTDBAPI
 """
 
-from aiotrivia.question import Question
-from aiotrivia.http import HTTPClient
-from aiotrivia.exceptions import *
 import json
 from random import choice
 from typing import List
+
+from aiotrivia.exceptions import *
+from aiotrivia.http import HTTPClient
+from aiotrivia.question import Question
 
 with open('categories.json', 'r') as f:
     data = json.load(f)
