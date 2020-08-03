@@ -17,3 +17,7 @@ Async Wrapper for the OpenTDB API
 <li></li>
 <li></li>
 </ul>
+
+```python
+Buhrojhbj
+```
