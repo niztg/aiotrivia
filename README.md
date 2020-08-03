@@ -11,6 +11,7 @@ client = TriviaClient()
 async def main():
     question = await client.get_random_question('easy')
     print("Question: %s | Answer: %s" % (question.question, question.answer))
+    await client.close() # after you're done with everything
 
 asyncio.get_event_loop().run_until_complete(main())
 ```
@@ -37,6 +38,7 @@ class TriviaCog(commands.Cog):
             question = await self.trivia.get_random_question(difficulty)
          except InvalidDifficulty:
             return await ctx.send(f'{difficulty} is not a valid difficulty!') 
+         await self.trivia.close()
          answers = question.incorrect_answers + [question.answer]
          random.shuffle(answers)
          final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
