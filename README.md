@@ -3,20 +3,23 @@ Async Wrapper for the OpenTDB API
 
 ### Example Usage
 ```py
-from aiotrivia import TriviaClient
 import asyncio
+import aiotrivia
 
-client = TriviaClient()
+client = aiotrivia.TriviaClient()
+
 
 async def main():
-    question = await client.get_random_question('easy')
-    print("Question: %s | Answer: %s" % (question.question, question.answer))
+    data = await client.get_specific_question(category=20)
+    for i in data:
+        print('%s | %s' % (i.question, i.responses))
+
 
 asyncio.get_event_loop().run_until_complete(main())
 ```
 
 #### Returns:
-`Question: In Big Hero 6, what fictional city is the Big Hero 6 from? | Answer: San Fransokyo`
+`Which figure from Greek mythology traveled to the underworld to return his wife Eurydice to the land of the living? | ['Daedalus', 'Hercules', 'Perseus', 'Orpheus']`
 
 ### discord.py command usage
 
