@@ -21,12 +21,13 @@ class TriviaClient:
     url = 'https://opentdb.com/api.php'
 
     async def get_random_question(self, difficulty=choice(['easy', 'medium', 'hard'])) -> Question:
+        difficulties = ('easy', 'medium', 'hard')
+        if difficulty not in difficulties:
+            raise InvalidDifficulty("%s is not a valid difficulty!" % difficulty)
         async with ClientSession() as cs:
             async with cs.get(self.url, params={"amount": 1, "difficulty": difficulty}) as r:
                 data = await r.json()
-            difficulties = ('easy', 'medium', 'hard')
-            if difficulty not in difficulties:
-                raise InvalidDifficulty("%s is not a valid difficulty!" % difficulty)
+            await cs.close()
         return Question(data=data.get('results')[0])
 
     async def get_specific_question(self, **kwargs) -> List[Question]:
@@ -62,6 +63,7 @@ class TriviaClient:
         async with ClientSession() as cs:
             async with cs.get(self.url, params=params) as r:
                 data = await r.json()
+            await cs.close()
             if data['response_code'] == 1:
                 raise ResponseError()
             for item in data.get('results'):
