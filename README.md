@@ -36,8 +36,8 @@ class TriviaCog(commands.Cog):
     async def trivia(self, ctx, difficulty):
         try:
             question = await self.trivia.get_random_question(difficulty)
-         except InvalidDifficulty:
-            return await ctx.send(f'{difficulty} is not a valid difficulty!') 
+         except InvalidDifficulty as error:
+            return await ctx.send(error) 
          answers = question.incorrect_answers + [question.answer]
          random.shuffle(answers)
          final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
