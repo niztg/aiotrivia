@@ -6,14 +6,15 @@ Async Wrapper for the OpenTDBAPI
 from aiotrivia.question import Question
 from aiotrivia.exceptions import *
 import aiohttp
-import requests
+import json
 from random import choice
 from typing import List
 
-CATEGORIES = {}
-request = requests.get('https://opentdb.com/api_category.php').json()
-for i in request['trivia_categories']:
-    CATEGORIES[i.get('id')] = i.get('name')
+with open('categories.json', 'r') as f:
+    data = json.load(f)
+
+CATEGORIES = {int(key): value for key, value in data.items()}
+
 
 
 class TriviaClient:
@@ -39,38 +40,35 @@ class TriviaClient:
             raise InvalidKwarg(
                 "You have passed an invalid keyword argument! Valid keyword arguments include: %s" % ', '.join(
                     valid_kwargs))
-        amount = kwargs.get('amount', 1)
-        type = kwargs.get('type')
-        category = kwargs.get('category')
-        difficulty = kwargs.get('difficulty')
-        if not 0 < amount < 50 or not isinstance(amount, int):
-            if amount:
+        amount, type, category, difficulty = kwargs.get('amount', 1), kwargs.get('type'), kwargs.get('category'), kwargs.get('difficulty')
+        if amount:
+            if not isinstance(amount, int) or not 0 < amount < 50:
                 raise InvalidAmount()
             else:
-                pass
+                params['amount'] = amount
         else:
-            params['amount'] = amount
-        if type not in ['multiple', 'boolean']:
-            if type:
+            pass
+        if type:
+            if type.lower() not in ['multiple', 'boolean']:
                 raise InvalidType()
             else:
-                pass
+                params['type'] = type
         else:
-            params['type'] = type
-        if not isinstance(category, int) or category not in [*CATEGORIES.keys()]:
-            if category:
+            pass
+        if category:
+            if not isinstance(category, int) or category not in [*CATEGORIES.keys()]:
                 raise InvalidCategory()
             else:
-                pass
+                params['category'] = category
         else:
-            params['category'] = category
-        if difficulty not in ['easy', 'medium', 'hard']:
-            if difficulty:
+            pass
+        if difficulty:
+            if difficulty.lower() not in ['easy', 'medium', 'hard']:
                 raise InvalidDifficulty()
             else:
-                pass
+                params['difficulty'] = difficulty
         else:
-            params['difficulty'] = difficulty
+            pass
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://opentdb.com/api.php", params=params) as r:
                 data = await r.json()
