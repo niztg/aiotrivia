@@ -1,16 +1,19 @@
 # aiotrivia
-Async Wrapper for the OpenTDB Api.
+Async Wrapper for the OpenTDB API
 
-### Usage
-```python
-from aiotrivia.client import TriviaClient
-import asyncio
+#### aiotrivia.client.TriviaClient
+<p>The trivia client used to fetch questions</p>
+<ul>
+<li>aiotrivia.client.TriviaClient.get_random_question(difficulty=random.choice(['easy', 'medium', 'hard'])) - Gets a random trivia question</li>
+<li></li>
+<li></li>
+</ul>
 
-client = TriviaClient()
-
-async def main():
-    question = await client.get_random_question(difficulty='easy')
-    return question.question, question.answer, question.incorrect_answers
-
-asyncio.get_event_loop().run_until_complete(main())
-```
+#### <em>aiotrivia.question.Question</em>
+<p>The question type returned when fetching a question</p>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
