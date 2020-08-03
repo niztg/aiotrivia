@@ -4,8 +4,8 @@ Async Wrapper for the OpenTDBAPI
 """
 
 from aiotrivia.question import Question
+from aiotrivia.http import HTTPClient
 from aiotrivia.exceptions import *
-import aiohttp
 import json
 from random import choice
 from typing import List
@@ -16,23 +16,17 @@ with open('categories.json', 'r') as f:
 CATEGORIES = {int(key): value for key, value in data.items()}
 
 
-
-class TriviaClient:
-
-    @staticmethod
-    async def get_random_question(difficulty=choice(['easy', 'medium', 'hard'])) -> Question:
-        async with aiohttp.ClientSession() as cs:
-            async with cs.get("https://opentdb.com/api.php",
-                              params={"amount": 1, "difficulty": difficulty}) as r:
-                data = await r.json()
-            await cs.close()
+class TriviaClient(HTTPClient):
+    async def get_random_question(self, difficulty=choice(['easy', 'medium', 'hard'])) -> Question:
+        async with self.session.get(self.url, params={"amount": 1, "difficulty": difficulty}) as r:
+            data = await r.json()
+        await self.session.close()
         difficulties = ('easy', 'medium', 'hard')
         if difficulty not in difficulties:
             raise InvalidDifficulty("%s is not a valid difficulty!" % difficulty)
         return Question(data=data.get('results')[0])
 
-    @staticmethod
-    async def get_specific_question(**kwargs) -> List[Question]:
+    async def get_specific_question(self, **kwargs) -> List[Question]:
         valid_kwargs = ['amount', 'type', 'category', 'difficulty']
         params = {}
         questions = []
@@ -69,10 +63,9 @@ class TriviaClient:
                 params['difficulty'] = difficulty
         else:
             pass
-        async with aiohttp.ClientSession() as cs:
-            async with cs.get("https://opentdb.com/api.php", params=params) as r:
-                data = await r.json()
-            await cs.close()
+        async with self.session.get(self.url, params=params) as r:
+            data = await r.json()
+        await self.session.close()
         if data['response_code'] == 1:
             raise ResponseError()
         for item in data.get('results'):

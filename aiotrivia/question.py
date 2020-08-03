@@ -1,4 +1,5 @@
 """
+-*- coding: utf-8 -*-
 The files containing question data
 """
 
