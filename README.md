@@ -37,7 +37,7 @@ class TriviaCog(commands.Cog):
             question = await self.trivia.get_random_question(difficulty)
          except InvalidDifficulty as error:
             return await ctx.send(error) 
-         answers = question.incorrect_answers + [question.answer]
+         answers = question.responses
          random.shuffle(answers)
          final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
          await ctx.send(f"**{question.question}**\n{final_answers}\n{question.type.capitalize()} Question about {question.category} of {question.difficulty} difficulty")
