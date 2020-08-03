@@ -1,20 +1,19 @@
 # aiotrivia
-Async Wrapper for the OpenTDB Api.
+Async Wrapper for the OpenTDB API
 
-### Usage
-```python
-from aiotrivia.client import TriviaClient
-import asyncio
+#### aiotrivia.client.TriviaClient
+<p>The trivia client used to fetch questions</p>
+<ul>
+<li>`aiotrivia.client.TriviaClient.get_random_question(difficulty=random.choice(['easy', 'medium', 'hard']))` - Gets a random trivia question</li>
+<li></li>
+<li></li>
+</ul>
 
-client = TriviaClient()
-
-async def main():
-    question = await client.get_random_question(difficulty='easy')
-    print('Question: %s | Answer: %s' % (question.question, question.answer))
-    
-    
-asyncio.get_event_loop().run_until_complete(main())
-```
-
-### Result:
-`Question: In Big Hero 6, what fictional city is the Big Hero 6 from? | Answer: San Fransokyo`
+#### <em>aiotrivia.question.Question</em>
+<p>The question type returned when fetching a question</p>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
