@@ -49,6 +49,9 @@ class TriviaCog(commands.Cog):
                 return await ctx.send(f'{msg.author} got it! The answer was {question.answer}')
           except asyncio.TimeoutError:
             return await ctx.send(f"The correct answer was {question.answer}")
+
+def setup(bot):
+    bot.add_cog(TriviaCog(bot))
 ```
 
          
