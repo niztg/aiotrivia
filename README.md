@@ -41,8 +41,7 @@ class TriviaCog(commands.Cog):
             return await ctx.send(f'{difficulty} is not a valid difficulty!') 
          answers = question.incorrect_answers + [question.answer]
          random.shuffle(answers)
-         answers = [f"{index}. {value}" for index, value in enumerate(answers, 1)]
-         final_answers = '\n'.join(answers)
+         final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
          await ctx.send(f"**{question.question}**\n{final_answers}\n{question.type.capitalize()} Question about {question.category} of {question.difficulty} difficulty")
          try:
             msg = await self.bot.wait_for('message', timeout=15)
