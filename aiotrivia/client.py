@@ -6,14 +6,15 @@ Async Wrapper for the OpenTDBAPI
 from aiotrivia.question import Question
 from aiotrivia.exceptions import *
 import aiohttp
-import requests
+import json
 from random import choice
 from typing import List
 
-CATEGORIES = {}
-request = requests.get('https://opentdb.com/api_category.php').json()
-for i in request['trivia_categories']:
-    CATEGORIES[i.get('id')] = i.get('name')
+with open('categories.json', 'r') as f:
+    data = json.load(f)
+
+CATEGORIES = {int(key): value for key, value in data.items()}
+
 
 
 class TriviaClient:
