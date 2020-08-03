@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-/.idea
-=======
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # Byte-compiled / optimized / DLL files
@@ -142,5 +139,4 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
->>>>>>> 848c53cdf5fab871de20811e2083b9461dc9795f
+tests/
