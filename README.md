@@ -8,12 +8,10 @@ import aiotrivia
 
 client = aiotrivia.TriviaClient()
 
-
 async def main():
     data = await client.get_specific_question(category=20)
     for i in data:
         print('%s | %s' % (i.question, i.responses))
-
 
 asyncio.get_event_loop().run_until_complete(main())
 ```
@@ -41,7 +39,6 @@ class TriviaCog(commands.Cog):
          except AiotriviaException as error:
             return await ctx.send(f"{error.__class__.__name__}: {error}") 
          answers = question.responses
-         random.shuffle(answers)
          final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
          await ctx.send(f"**{question.question}**\n{final_answers}\n{question.type.capitalize()} Question about {question.category} of {question.difficulty} difficulty")
          try:
