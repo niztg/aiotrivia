@@ -4,7 +4,7 @@ Async Wrapper for the OpenTDB API
 
 ### Example Usage
 ```py
-from aiotrivia.client import TriviaClient
+from aiotrivia import TriviaClient
 import asyncio
 
 client = TriviaClient()
@@ -22,8 +22,7 @@ asyncio.get_event_loop().run_until_complete(main())
 ### discord.py command usage
 
 ```py
-from aiotrivia.client import TriviaClient
-from aiotrivia.exceptions import InvalidDifficulty
+from aiotrivia import TriviaClient, InvalidDifficulty
 from discord.ext import commands
 import asyncio
 import random
