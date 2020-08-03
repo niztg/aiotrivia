@@ -11,3 +11,6 @@ class HTTPClient:
     def __init__(self, session=aiohttp.ClientSession(), url='https://opentdb.com/api.php'):
         self.session = session
         self.url = url
+
+    async def close(self):
+        await self.session.close()

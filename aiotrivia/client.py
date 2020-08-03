@@ -21,7 +21,6 @@ class TriviaClient(HTTPClient):
     async def get_random_question(self, difficulty=choice(['easy', 'medium', 'hard'])) -> Question:
         async with self.session.get(self.url, params={"amount": 1, "difficulty": difficulty}) as r:
             data = await r.json()
-        await self.session.close()
         difficulties = ('easy', 'medium', 'hard')
         if difficulty not in difficulties:
             raise InvalidDifficulty("%s is not a valid difficulty!" % difficulty)
@@ -66,9 +65,9 @@ class TriviaClient(HTTPClient):
             pass
         async with self.session.get(self.url, params=params) as r:
             data = await r.json()
-        await self.session.close()
         if data['response_code'] == 1:
             raise ResponseError()
         for item in data.get('results'):
             questions.append(Question(data=item))
         return questions
+
