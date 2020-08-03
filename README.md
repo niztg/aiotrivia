@@ -21,7 +21,7 @@ asyncio.get_event_loop().run_until_complete(main())
 ### discord.py command usage
 
 ```py
-from aiotrivia import TriviaClient, InvalidDifficulty
+from aiotrivia import TriviaClient, AiotriviaException
 from discord.ext import commands
 import asyncio
 import random
@@ -35,8 +35,8 @@ class TriviaCog(commands.Cog):
     async def trivia(self, ctx, difficulty):
         try:
             question = await self.trivia.get_random_question(difficulty)
-         except InvalidDifficulty as error:
-            return await ctx.send(error) 
+         except AiotriviaException as error:
+            return await ctx.send(f"{error.__class__.__name__}: {error}") 
          answers = question.responses
          random.shuffle(answers)
          final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
