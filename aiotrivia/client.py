@@ -6,9 +6,9 @@ Async Wrapper for the OpenTDBAPI
 import json
 from random import choice
 from typing import List
+from aiohttp import ClientSession
 
 from aiotrivia.exceptions import *
-from aiotrivia.http import HTTPClient
 from aiotrivia.question import Question
 
 with open('categories.json', 'r') as f:
@@ -17,13 +17,16 @@ with open('categories.json', 'r') as f:
 CATEGORIES = {int(key): value for key, value in data.items()}
 
 
-class TriviaClient(HTTPClient):
+class TriviaClient:
+    url = 'https://opentdb.com/api.php'
+
     async def get_random_question(self, difficulty=choice(['easy', 'medium', 'hard'])) -> Question:
-        async with self.session.get(self.url, params={"amount": 1, "difficulty": difficulty}) as r:
-            data = await r.json()
-        difficulties = ('easy', 'medium', 'hard')
-        if difficulty not in difficulties:
-            raise InvalidDifficulty("%s is not a valid difficulty!" % difficulty)
+        async with ClientSession() as cs:
+            async with cs.get(self.url, params={"amount": 1, "difficulty": difficulty}) as r:
+                data = await r.json()
+            difficulties = ('easy', 'medium', 'hard')
+            if difficulty not in difficulties:
+                raise InvalidDifficulty("%s is not a valid difficulty!" % difficulty)
         return Question(data=data.get('results')[0])
 
     async def get_specific_question(self, **kwargs) -> List[Question]:
@@ -34,40 +37,33 @@ class TriviaClient(HTTPClient):
             raise InvalidKwarg(
                 "You have passed an invalid keyword argument! Valid keyword arguments include: %s" % ', '.join(
                     valid_kwargs))
-        amount, type, category, difficulty = kwargs.get('amount', 1), kwargs.get('type'), kwargs.get('category'), kwargs.get('difficulty')
+        amount, type, category, difficulty = kwargs.get('amount', 1), kwargs.get('type'), kwargs.get(
+            'category'), kwargs.get('difficulty')
         if amount:
             if not isinstance(amount, int) or not 0 < amount < 50:
                 raise InvalidAmount()
             else:
                 params['amount'] = amount
-        else:
-            pass
         if type:
             if type.lower() not in ['multiple', 'boolean']:
                 raise InvalidType()
             else:
                 params['type'] = type
-        else:
-            pass
         if category:
-            if not isinstance(category, int) or category not in [*CATEGORIES.keys()]:
+            if not isinstance(category, int) or category not in CATEGORIES:
                 raise InvalidCategory()
             else:
                 params['category'] = category
-        else:
-            pass
         if difficulty:
             if difficulty.lower() not in ['easy', 'medium', 'hard']:
                 raise InvalidDifficulty()
             else:
                 params['difficulty'] = difficulty
-        else:
-            pass
-        async with self.session.get(self.url, params=params) as r:
-            data = await r.json()
-        if data['response_code'] == 1:
-            raise ResponseError()
-        for item in data.get('results'):
-            questions.append(Question(data=item))
+        async with ClientSession() as cs:
+            async with cs.get(self.url, params=params) as r:
+                data = await r.json()
+            if data['response_code'] == 1:
+                raise ResponseError()
+            for item in data.get('results'):
+                questions.append(Question(data=item))
         return questions
-
