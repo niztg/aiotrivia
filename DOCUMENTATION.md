@@ -129,5 +129,17 @@ except AiotriviaException as e:
 ```
 Can raise all 6 of these errors. (Depending on the situation.)
 
+#### Example Usage:
+```py
+try:
+     q = await trivia.get_random_question('fake_difficulty')
+except AiotriviaException as error:
+     print(f"{error.__class__.__name__}: {error}")
+
+```
+returns => 
+```
+InvalidDifficulty: fake_difficulty is not a valid difficulty!
+```
 
 ## CATEGORIES
