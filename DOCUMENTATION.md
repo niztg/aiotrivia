@@ -13,7 +13,7 @@ trivia = TriviaClient()
 ```
 <em>Note: You can call your instance whatever you want. For the sake of this example, we will call it `trivia`.</em>
 
-### *await* trivia.get_random_question(*difficulty*)
+### `await trivia.get_random_question(difficulty)`
 Returns a random trivia question.
 
 #### Parameters:
