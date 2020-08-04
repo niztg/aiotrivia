@@ -22,7 +22,13 @@ Returns a random trivia question.
 #### Raises:
 **InvalidDifficulty**: If the difficulty you passed in is not 'easy', 'medium' or 'hard'
 
-**FIX**: Pass in a valid difficulty.
+#### Example Usage:
+```py
+question = await trivia.get_random_question('medium')
+print(f"{question.question} | Answer: {question.answer}")
+```
+returns =>
+`There was a satirical candidate named "Deez Nuts" running in the 2016 US presidential elections. | Answer: True`
  
 ## aiotrivia.question.Question
 
