@@ -43,6 +43,15 @@ Gets a specific question based on the kwargs you passed in.
 - amount: The amount of questions you want. Must be between 0-50.
 - type: The type of question you want. Must be either "multiple" (For 4 choices) or "boolean" (For true/false answers)
 - category: The category of question you want. Must be a valid category integer. View CATEGORIES for int to string category mapping.
+- difficulty: The difficulty of the question you want. Must be either easy, medium or hard.
+
+#### Raises:
+**InvalidKwarg**: If a kwarg you passed in was not in the valid kwargs.
+**InvalidAmount**: If your amount is too large, or <= 0.
+**InvalidType**: If your type is not 'boolean' or 'multiple'.
+**InvalidCategory**: If your category is not an integer, or your category is not in the valid category list.
+**InvalidDifficulty**: If your difficulty is not 'easy', 'medium' or 'hard'
+**ResponseError**: If the api does not have enough questions to accommodate your parameters. 
  
 ## aiotrivia.question.Question
 
