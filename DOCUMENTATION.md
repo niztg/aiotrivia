@@ -32,6 +32,17 @@ print(f"{question.question} | Answer: {question.answer}")
 ```
 returns => <br>
 `In the episode of SpongeBob SquarePants, "Survival of the Idiots", Spongebob called Patrick which nickname? | Answer: Pinhead`
+
+### *await* trivia.get_specific_question(*\**kwargs*)
+Gets a specific question based on the kwargs you passed in. 
+
+#### Parameters:
+**kwargs**: Key word arguments used to get a specific question.
+
+#### Valid kwargs:
+- amount: The amount of questions you want. Must be between 0-50.
+- type: The type of question you want. Must be either "multiple" (For 4 choices) or "boolean" (For true/false answers)
+- category: The category of question you want. Must be a valid category integer. View CATEGORIES for int to string category mapping.
  
 ## aiotrivia.question.Question
 
