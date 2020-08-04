@@ -60,7 +60,7 @@ List[<a href=https://github.com/niztg/aiotrivia/blob/master/DOCUMENTATION.md#aio
 
 #### Example Usage:
 ```py
-questions = await client.get_specific_question(amount=3, category=15, difficulty='easy', type='boolean')f
+questions = await trivia.get_specific_question(amount=3, category=15, difficulty='easy', type='boolean')
 for question in questions:
      print(f"{question.question} => {question.type} | {question.category}")
 ```
