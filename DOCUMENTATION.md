@@ -30,8 +30,8 @@ Returns a random trivia question.
 question = await trivia.get_random_question('medium')
 print(f"{question.question} | Answer: {question.answer}")
 ```
-returns =>
-`There was a satirical candidate named "Deez Nuts" running in the 2016 US presidential elections. | Answer: True`
+returns => <br>
+`In the episode of SpongeBob SquarePants, "Survival of the Idiots", Spongebob called Patrick which nickname? | Answer: Pinhead`
  
 ## aiotrivia.question.Question
 
