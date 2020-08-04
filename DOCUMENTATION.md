@@ -46,12 +46,12 @@ Gets a specific question based on the kwargs you passed in.
 - difficulty: The difficulty of the question you want. Must be either easy, medium or hard.
 
 #### Raises:
-**InvalidKwarg**: If a kwarg you passed in was not in the valid kwargs.
-**InvalidAmount**: If your amount is too large, or <= 0.
-**InvalidType**: If your type is not 'boolean' or 'multiple'.
-**InvalidCategory**: If your category is not an integer, or your category is not in the valid category list.
-**InvalidDifficulty**: If your difficulty is not 'easy', 'medium' or 'hard'
-**ResponseError**: If the api does not have enough questions to accommodate your parameters. 
+**InvalidKwarg**: If a kwarg you passed in was not in the valid kwargs.<br>
+**InvalidAmount**: If your amount is too large, or <= 0.<br>
+**InvalidType**: If your type is not 'boolean' or 'multiple'.<br>
+**InvalidCategory**: If your category is not an integer, or your category is not in the valid category list.<br>
+**InvalidDifficulty**: If your difficulty is not 'easy', 'medium' or 'hard'<br>
+**ResponseError**: If the api does not have enough questions to accommodate your parameters. <br>
  
 ## aiotrivia.question.Question
 
