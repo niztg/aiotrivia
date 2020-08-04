@@ -45,6 +45,9 @@ Gets a specific question based on the kwargs you passed in.
 - category: The category of question you want. Must be a valid category integer. View CATEGORIES for int to string category mapping.
 - difficulty: The difficulty of the question you want. Must be either easy, medium or hard.
 
+#### Returns Type
+List[<a href=https://github.com/niztg/aiotrivia/blob/master/DOCUMENTATION.md#aiotriviaquestionquestion>Question</a>]
+
 #### Raises:
 **InvalidKwarg**: If a kwarg you passed in was not in the valid kwargs.<br>
 **InvalidAmount**: If your amount is too large, or <= 0.<br>
