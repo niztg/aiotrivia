@@ -72,7 +72,52 @@ The main playable character of the 2015 RPG "Undertale" is a monster. => boolean
 ``` 
  
 ## aiotrivia.question.Question
+The question type returned when getting a question from the API. 
 
+### `Question.category`
+The string of the question's category.
+
+Type: str
+
+### `Question.type`
+Returns the question's type. (`mutiple` or `boolean`)
+
+Type: str
+
+### `Question.question`
+The question text itself.
+
+Type: str
+
+### `Question.answer`
+The correct answer to the question
+
+Type: str
+
+### `Question.incorrect_answers`
+The incorrect answers of the question.
+
+Type: list
+
+### `Question.responses`
+Returns a random shuffled list of all the responses to the question, including the correct answer, incorrect answers, and custom incorrect answers
+
+### Question.add_incorrect_answers(*\*args*)
+
+#### Parameters:
+args: The incorrect answers you want to append to the incorrect answers list.
+
+#### Example Usage:
+```py
+question = await client.get_specific_question(category=11)
+question = question[0]
+question.add_incorrect_answers('bruh', 'moment')
+print(question.responses)
+```
+returns => 
+```
+['A New Hope', 'The Force Awakens', 'bruh', 'moment', 'Revenge of the Sith', 'The Phantom Menace']
+```
 
 ## Exceptions
 
