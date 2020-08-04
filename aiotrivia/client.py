@@ -18,6 +18,9 @@ CATEGORIES = {int(key): value for key, value in data.items()}
 
 
 class TriviaClient:
+    """
+    The main trivia client used to get questions from the API
+    """
     url = 'https://opentdb.com/api.php'
 
     async def get_random_question(self, difficulty=choice(['easy', 'medium', 'hard'])) -> Question:
