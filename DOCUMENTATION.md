@@ -31,7 +31,9 @@ question = await trivia.get_random_question('medium')
 print(f"{question.question} | Answer: {question.answer}")
 ```
 returns => <br>
-`In the episode of SpongeBob SquarePants, "Survival of the Idiots", Spongebob called Patrick which nickname? | Answer: Pinhead`
+```
+In the episode of SpongeBob SquarePants, "Survival of the Idiots", Spongebob called Patrick which nickname? | Answer: Pinhead
+```
 
 ### *await* trivia.get_specific_question(*\**kwargs*)
 Gets a specific question based on the kwargs you passed in. 
@@ -55,6 +57,19 @@ List[<a href=https://github.com/niztg/aiotrivia/blob/master/DOCUMENTATION.md#aio
 **InvalidCategory**: If your category is not an integer, or your category is not in the valid category list.<br>
 **InvalidDifficulty**: If your difficulty is not 'easy', 'medium' or 'hard'<br>
 **ResponseError**: If the api does not have enough questions to accommodate your parameters. <br>
+
+#### Example Usage:
+```py
+questions = await client.get_specific_question(amount=3, category=15, difficulty='easy', type='boolean')f
+for question in questions:
+     print(f"{question.question} => {question.type} | {question.category}")
+```
+returns => 
+```
+The 2005 video game "Call of Duty 2: Big Red One" is not available on PC. => boolean | Entertainment: Video Games
+In Team Fortress 2, being disguised as a scout or medic results in a speed boost. => boolean | Entertainment: Video Games
+The main playable character of the 2015 RPG "Undertale" is a monster. => boolean | Entertainment: Video Games
+``` 
  
 ## aiotrivia.question.Question
 
