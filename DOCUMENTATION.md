@@ -159,7 +159,7 @@ print(aiotrivia.CATEGORIES)
 ```
 returns =>
 
-```json
+```py
 {
 9: 'General Knowledge', 
 10: 'Entertainment: Books', 
