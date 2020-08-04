@@ -19,6 +19,9 @@ Returns a random trivia question.
 #### Parameters:
 **difficulty**[optional]: The difficulty of question you want. Defaults to a random choice between 'easy', 'medium' and 'hard'
 
+#### Returns Type:
+<a href=https://github.com/niztg/aiotrivia/blob/master/DOCUMENTATION.md#aiotriviaquestionquestion>Question</a>
+
 #### Raises:
 **InvalidDifficulty**: If the difficulty you passed in is not 'easy', 'medium' or 'hard'
 
