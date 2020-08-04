@@ -25,7 +25,6 @@ asyncio.get_event_loop().run_until_complete(main())
 from aiotrivia import TriviaClient, AiotriviaException
 from discord.ext import commands
 import asyncio
-import random
 
 class TriviaCog(commands.Cog):
     def __init__(self, bot):
