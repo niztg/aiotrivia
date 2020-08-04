@@ -120,6 +120,14 @@ returns =>
 ```
 
 ## Exceptions
+All of the custom aiotrivia exceptions (InvalidAmount, InvalidDifficulty, InvalidType, InvalidCategory, InvalidKwarg, ResponseError) are subclasses of AiotriviaException. This means that:
+```py
+try:
+     # code
+except AiotriviaException as e:
+     raise e
+```
+Can raise all 6 of these errors. (Depending on the situation.)
 
 
 ## CATEGORIES
