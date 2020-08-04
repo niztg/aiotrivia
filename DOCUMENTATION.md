@@ -131,6 +131,11 @@ Can raise all 6 of these errors. (Depending on the situation.)
 
 #### Example Usage:
 ```py
+from aiotrivia import TriviaClient
+from aiotrivia.exceptions import AiotriviaException
+
+trivia = TriviaClient()
+
 try:
      q = await trivia.get_random_question('fake_difficulty')
 except AiotriviaException as error:
