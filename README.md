@@ -35,17 +35,19 @@ class TriviaCog(commands.Cog):
     async def trivia(self, ctx, difficulty):
         try:
             question = await self.trivia.get_random_question(difficulty)
-         except AiotriviaException as error:
-            return await ctx.send(f"{error.__class__.__name__}: {error}") 
-         answers = question.responses
-         final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
-         await ctx.send(f"**{question.question}**\n{final_answers}\n{question.type.capitalize()} Question about {question.category} of {question.difficulty} difficulty")
-         try:
-            msg = await self.bot.wait_for('message', timeout=15)
-            if str(answers.index(question.answer)+1) in msg.content.lower():
-                return await ctx.send(f'{msg.author} got it! The answer was {question.answer}')
-          except asyncio.TimeoutError:
-            return await ctx.send(f"The correct answer was {question.answer}")
+        except AiotriviaException as error:
+            return await ctx.send(f"{error.__class__.__name__}: {error}")
+        answers = question.responses
+        final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
+        message = await ctx.send(f"**{question.question}**\n{final_answers}\n{question.type.capitalize()} Question about {question.category}")
+        answer = answers.index(question.answer)+1
+        try:
+            while True:
+                msg = await self.client.wait_for('message', timeout=15, check=lambda m: m.id != message.id)
+                if str(answer) in msg.content:
+                    return await ctx.send(f"{answer} was correct! ({question.answer})")
+        except asyncio.TimeoutError:
+            await ctx.send(f"The correct answer was {question.answer}")
 
 def setup(bot):
     bot.add_cog(TriviaCog(bot))
