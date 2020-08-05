@@ -1,6 +1,11 @@
 # aiotrivia
 Async Wrapper for the OpenTDB API
 
+### Installation
+```sh
+$ pip install git+https://github.com/niztg/aiotrivia
+```
+
 ### Example Usage
 ```py
 import asyncio
