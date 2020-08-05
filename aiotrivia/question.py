@@ -6,6 +6,7 @@ The files containing question data
 from html import unescape
 from random import sample
 
+
 class Question:
     """
     The question type returned when getting questions
@@ -24,7 +25,7 @@ class Question:
 
     @property
     def responses(self):
-        responses = self.incorrect_answers+[self.answer]
+        responses = self.incorrect_answers + [self.answer]
         return sample(responses, len(responses))
 
     def add_incorrect_answers(self, *args):
