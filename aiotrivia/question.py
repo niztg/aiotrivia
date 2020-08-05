@@ -6,7 +6,6 @@ The files containing question data
 from html import unescape
 from random import sample
 
-
 class Question:
     """
     The question type returned when getting questions

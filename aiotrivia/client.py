@@ -23,6 +23,9 @@ class TriviaClient:
     """
     url = 'https://opentdb.com/api.php'
 
+    def __repr__(self):
+        return f"aiotrivia.client.TriviaClient"
+
     async def get_random_question(self, difficulty=choice(['easy', 'medium', 'hard'])) -> Question:
         difficulties = ('easy', 'medium', 'hard')
         if difficulty not in difficulties:
