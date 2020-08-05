@@ -30,6 +30,7 @@ asyncio.get_event_loop().run_until_complete(main())
 from aiotrivia import TriviaClient, AiotriviaException
 from discord.ext import commands
 import asyncio
+import random
 
 class TriviaCog(commands.Cog):
     def __init__(self, bot):
@@ -43,6 +44,7 @@ class TriviaCog(commands.Cog):
         except AiotriviaException as error:
             return await ctx.send(f"{error.__class__.__name__}: {error}")
         answers = question.responses
+        random.shuffle(answers)
         final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
         message = await ctx.send(f"**{question.question}**\n{final_answers}\n{question.type.capitalize()} Question about {question.category}")
         answer = answers.index(question.answer)+1
