@@ -4,7 +4,7 @@ The files containing question data
 """
 
 from html import unescape
-from random import randint, shuffle
+from random import randint
 
 
 class Question:
