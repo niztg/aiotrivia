@@ -99,6 +99,11 @@ The incorrect answers of the question.
 
 Type: list
 
+### `Question.difficulty`
+The difficulty of the question
+
+Type: str
+
 ### `Question.responses`
 Returns a random shuffled list of all the responses to the question, including the correct answer, incorrect answers, and custom incorrect answers
 
