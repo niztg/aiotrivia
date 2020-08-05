@@ -51,3 +51,4 @@ def setup(bot):
     bot.add_cog(TriviaCog(bot))
 ```
 #### <a href=https://github.com/niztg/aiotrivia/blob/master/DOCUMENTATION.md>For more info, read the documentation</a>
+#### <a href=https://cybertron-5k.netlify.app/server>Or join the discord server</a>
