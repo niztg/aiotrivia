@@ -2,8 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='aiotrivia',
+    author='niztg',
     url='https://github.com/niztg/aiotrivia',
-    version='1.2.1',
+    version='1.2.4',
     license='MIT',
     project_urls={'Discord Server': 'https://discord.com/invite/2fxKxJH'},
     description='Asynchronous API Wrapper for the OpenTDB Api. (https://opentdb.com/)',
