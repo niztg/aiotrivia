@@ -104,8 +104,26 @@ The difficulty of the question
 
 Type: str
 
+### `Question.incorrect_reponses`
+The incorrect responses including custom ones
+
+Type: list
+
+### `Question.custom_incorrect`
+Your incorrect answers
+
+Type: list
+
+
 ### `Question.responses`
 Returns a random shuffled list of all the responses to the question, including the correct answer, incorrect answers, and custom incorrect answers
+
+Type: list
+
+### `Question.num`
+Where the right answer will be indexed in `Question.responses` (-1) 👀
+
+Type: int
 
 ### Question.add_incorrect_answers(*\*args*)
 
