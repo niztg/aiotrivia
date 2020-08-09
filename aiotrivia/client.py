@@ -36,8 +36,7 @@ class TriviaClient:
             raise InvalidKwarg(
                 "You have passed an invalid keyword argument! Valid keyword arguments include: %s" % ', '.join(
                     valid_kwargs))
-        amount, type, category, difficulty = kwargs.get('amount', 1), kwargs.get('type'), kwargs.get(
-            'category'), kwargs.get('difficulty')
+        amount, type, category, difficulty = kwargs.get('amount', 1), kwargs.get('type'), kwargs.get('category'), kwargs.get('difficulty')
         if amount:
             if not isinstance(amount, int) or not 0 < amount < 50:
                 raise InvalidAmount()
