@@ -71,6 +71,9 @@ In Team Fortress 2, being disguised as a scout or medic results in a speed boost
 The main playable character of the 2015 RPG "Undertale" is a monster. => boolean | Entertainment: Video Games
 ``` 
  
+### *await* trivia.close()
+Closes the trivia session. Use after you're done.
+ 
 ## aiotrivia.question.Question
 The question type returned when getting a question from the API. 
 
