@@ -37,11 +37,10 @@ class TriviaClient:
                 "You have passed an invalid keyword argument! Valid keyword arguments include: %s" % ', '.join(
                     valid_kwargs))
         amount, type, category, difficulty = kwargs.get('amount', 1), kwargs.get('type'), kwargs.get('category'), kwargs.get('difficulty')
-        if amount:
-            if not isinstance(amount, int) or not 0 < amount < 50:
-                raise InvalidAmount()
-            else:
-                params['amount'] = amount
+        if not isinstance(amount, int) or not 0 < amount < 50:
+            raise InvalidAmount()
+        else:
+            params['amount'] = amount
         if type:
             if type.lower() not in ['multiple', 'boolean']:
                 raise InvalidType()
