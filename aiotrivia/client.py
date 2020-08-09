@@ -5,37 +5,10 @@ Async Wrapper for the OpenTDBAPI
 
 from random import choice
 from typing import List
-from aiohttp import ClientSession
 
 from aiotrivia.exceptions import *
-from aiotrivia.question import Question
-
-CATEGORIES = {
-    9: "General Knowledge",
-    10: "Entertainment: Books",
-    11: "Entertainment: Film",
-    12: "Entertainment: Music",
-    13: "Entertainment: Musicals & Theatres",
-    14: "Entertainment: Television",
-    15: "Entertainment: Video Games",
-    16: "Entertainment: Board Games",
-    17: "Science & Nature",
-    18: "Science: Computers",
-    19: "Science: Mathematics",
-    20: "Mythology",
-    21: "Sports",
-    22: "Geography",
-    23: "History",
-    24: "Politics",
-    25: "Art",
-    26: "Celebrities",
-    27: "Animals",
-    28: "Vehicles",
-    29: "Entertainment: Comics",
-    30: "Science: Gadgets",
-    31: "Entertainment: Japanese Anime & Manga",
-    32: "Entertainment: Cartoon & Animations"
-}
+from aiotrivia.http import HTTPClient
+from aiotrivia.question import Question, CATEGORIES
 
 
 class TriviaClient:
@@ -43,6 +16,7 @@ class TriviaClient:
     The main trivia client used to get questions from the API
     """
     url = 'https://opentdb.com/api.php'
+    http = HTTPClient()
 
     def __repr__(self):
         return f"aiotrivia.client.TriviaClient"
@@ -51,10 +25,7 @@ class TriviaClient:
         difficulties = ('easy', 'medium', 'hard')
         if difficulty not in difficulties:
             raise InvalidDifficulty("%s is not a valid difficulty!" % difficulty)
-        async with ClientSession() as cs:
-            async with cs.get(self.url, params={"amount": 1, "difficulty": difficulty}) as r:
-                data = await r.json()
-            await cs.close()
+        data = await self.http.get(self.url, params={"amount": 1, "difficulty": difficulty})
         return Question(data=data.get('results')[0])
 
     async def get_specific_question(self, **kwargs) -> List[Question]:
@@ -87,12 +58,10 @@ class TriviaClient:
                 raise InvalidDifficulty()
             else:
                 params['difficulty'] = difficulty
-        async with ClientSession() as cs:
-            async with cs.get(self.url, params=params) as r:
-                data = await r.json()
-            await cs.close()
-            if data['response_code'] == 1:
-                raise ResponseError()
-            for item in data.get('results'):
-                questions.append(Question(data=item))
+        data = await self.http.get(self.url, params)
+        for item in data.get('results'):
+            questions.append(Question(data=item))
         return questions
+
+    async def close(self):
+        await self.http.close()

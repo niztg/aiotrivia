@@ -17,6 +17,7 @@ async def main():
     data = await client.get_specific_question(category=20)
     for i in data:
         print('%s | %s' % (i.question, i.responses))
+    await client.close() # after you're done with everything
 
 asyncio.get_event_loop().run_until_complete(main())
 ```
@@ -48,6 +49,7 @@ class TriviaCog(commands.Cog):
         final_answers = '\n'.join([f"{index}. {value}" for index, value in enumerate(answers, 1)])
         message = await ctx.send(f"**{question.question}**\n{final_answers}\n{question.type.capitalize()} Question about {question.category}")
         answer = answers.index(question.answer)+1
+        await self.trivia.close() # cleaning up
         try:
             while True:
                 msg = await self.client.wait_for('message', timeout=15, check=lambda m: m.id != message.id)
