@@ -4,7 +4,7 @@ setup(
     name='aiotrivia',
     author='niztg',
     url='https://github.com/niztg/aiotrivia',
-    version='1.5.0',
+    version='2.0.1',
     license='MIT',
     project_urls={'Discord Server': 'https://discord.com/invite/2fxKxJH'},
     description='Asynchronous API Wrapper for the OpenTDB Api. (https://opentdb.com/)',
